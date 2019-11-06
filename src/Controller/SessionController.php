@@ -74,7 +74,7 @@ class SessionController extends AbstractController
     /**
      * @Route("/session/edit/{id}", name="session_update")
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $session = $entityManager->getRepository(Session::class)->find($id);
@@ -85,7 +85,7 @@ class SessionController extends AbstractController
             );
         }
 
-        $session->setSessionName('New session name!');
+        $session->setSessionName($request->request->get('sessionName'));
         $entityManager->flush();
 
         return $this->redirectToRoute('session_show', [

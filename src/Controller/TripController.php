@@ -70,7 +70,7 @@ class TripController extends AbstractController
     /**
      * @Route("/trip/edit/{id}", name="trip_update")
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $trip = $entityManager->getRepository(Trip::class)->find($id);
@@ -80,8 +80,10 @@ class TripController extends AbstractController
                 'No product found for id '.$id
             );
         }
+        $trip->setUserName($request->request->get('userName'));
+        $trip->setLootValue($request->request->get('lootValue'));
+        $trip->setSessionId($request->request->get('sessionId'));
 
-//        $trip->setSessionName('New trip name!');
         $entityManager->flush();
 
         return $this->redirectToRoute('trip_get', [
