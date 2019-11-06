@@ -77,12 +77,11 @@ class TripController extends AbstractController
 
         if (!$trip) {
             throw $this->createNotFoundException(
-                'No product found for id '.$id
+                'No trip found for id '.$id
             );
         }
         $trip->setUserName($request->request->get('userName'));
         $trip->setLootValue($request->request->get('lootValue'));
-        $trip->setSessionId($request->request->get('sessionId'));
 
         $entityManager->flush();
 

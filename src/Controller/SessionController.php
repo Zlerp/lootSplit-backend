@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\SessionResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -66,7 +67,11 @@ class SessionController extends AbstractController
             ->getRepository(Trip::class)
             ->findBy(array('sessionId' => $id));
 
-        return new JsonResponse([$sessions, $trips]);
+        $sessionResponse = new SessionResponse();
+        $sessionResponse->setSession($sessions);
+        $sessionResponse->setTrips($trips);
+
+        return new JsonResponse($sessionResponse);
 
     }
 
