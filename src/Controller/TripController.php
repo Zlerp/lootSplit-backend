@@ -21,6 +21,8 @@ class TripController extends AbstractController
      */
     public function createTrip(Request $request)
     {
+        header("Access-Control-Allow-Origin: *");
+
         $entityManager = $this->getDoctrine()->getManager();
         $trip = new Trip();
         $trip->setUserName($request->query->get('userName'));
@@ -44,6 +46,7 @@ class TripController extends AbstractController
      */
     public function getTrips($id = '')
     {
+        header("Access-Control-Allow-Origin: *");
 
         if ($id === '') {
             $tripRepository = $this->getDoctrine()
@@ -71,7 +74,8 @@ class TripController extends AbstractController
      * @Route("/trip/edit/{id}", name="trip_update")
      */
     public function update(Request $request, $id)
-    {
+    {        header("Access-Control-Allow-Origin: *");
+
         $entityManager = $this->getDoctrine()->getManager();
         $trip = $entityManager->getRepository(Trip::class)->find($id);
 
@@ -94,7 +98,8 @@ class TripController extends AbstractController
      * @Route("/trip/delete/{id}", name="trip_delete")
      */
     public function delete($id)
-    {
+    {        header("Access-Control-Allow-Origin: *");
+
         $entityManager = $this->getDoctrine()->getManager();
         $trip = $entityManager->getRepository(Trip::class)->find($id);
 

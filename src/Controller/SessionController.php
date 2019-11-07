@@ -23,6 +23,7 @@ class SessionController extends AbstractController
      */
     public function createSession(Request $request)
     {
+        header("Access-Control-Allow-Origin: *");
         $entityManager = $this->getDoctrine()->getManager();
         $session = new Session();
         $session->setSessionName($request->query->get('sessionName'));
@@ -44,6 +45,7 @@ class SessionController extends AbstractController
      */
     public function getSession($id = '')
     {
+        header("Access-Control-Allow-Origin: *");
 
         if ($id === '') {
             $sessionRepository = $this->getDoctrine()
@@ -81,6 +83,7 @@ class SessionController extends AbstractController
      */
     public function update(Request $request, $id)
     {
+        header("Access-Control-Allow-Origin: *");
         $entityManager = $this->getDoctrine()->getManager();
         $session = $entityManager->getRepository(Session::class)->find($id);
 
@@ -103,6 +106,7 @@ class SessionController extends AbstractController
      */
     public function delete($id)
     {
+        header("Access-Control-Allow-Origin: *");
         $entityManager = $this->getDoctrine()->getManager();
         $session = $entityManager->getRepository(Session::class)->find($id);
 
